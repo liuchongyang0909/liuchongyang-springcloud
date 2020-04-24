@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: consul-client
+  profiles:
+    active: test
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+server:
+  port: 8181
+
+management:
+  server:
+    port: 9001
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+---
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      config:
+        enabled: true
+        format: yaml
+        prefix: config
+        profile-separator: ':'
+        data-key: data
+
+---
+spring:
+  profiles: test
+  cloud:
+    consul:
+      config:
+        enabled: true
+        format: yaml
+        prefix: config
+        profile-separator: ':'
+        data-key: data
