@@ -1,3 +1,5 @@
+server:
+  port: 8181
 spring:
   application:
     name: consul-client
@@ -8,21 +10,7 @@ spring:
       host: localhost
       port: 8500
       discovery:
-        service-name: ${spring.application.name}
-server:
-  port: 8181
-
-management:
-  server:
-    port: 9001
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: always
-
+        service-name: consul-client
 ---
 spring:
   profiles: dev
@@ -34,7 +22,6 @@ spring:
         prefix: config
         profile-separator: ':'
         data-key: data
-
 ---
 spring:
   profiles: test
